@@ -18,17 +18,17 @@
     <div class="container-fluid">
         <div class="row navbar">
             <div class="col-10 text-center">
-                <h1>
-                    <class="navbar-brand">
+                <h1 class="navbar-brand pb-0 px-0">
                         Cory's Weather Dashboard
                 </h1>
             </div>
         </div>
         <div class="row content-row">
+            <div class="col-12 col-md-3 bg-light pt-3">
             <h3>
                 Search for a City:
             </h3>
-        </div>
+      
         <form>
             <div class="form-group input-group">
                 <input type="text" class="form-control" id="find-city" placeholder="Please enter city here...">
@@ -40,8 +40,16 @@
                     </button>
                 </div>
             </div>
-           
-        </form>
+            </form>
+            <div class="card">
+                <ul class="list-group list-group-fluch" id="search-history">
+                </ul>
+<button id="clear-data" class="btn btn-med-secondary hide">
+    Clear history
+</button>
+            </div>
+            <div>
+       
         <script src="Assets/script.js"></script>
 </body>
 
