@@ -29,3 +29,19 @@ color:white
     background-color: #2c61a5;
     color: white;
 }
+span.severe{
+    padding: 3px;
+    background-color: red;
+    color:white;
+}
+
+span.moderate{
+    padding: 3px;
+    background-color: yellow;
+}
+
+span.favorable{
+    padding: 3px;
+    background-color: green;
+    color:white;
+}

@@ -15,7 +15,7 @@ var cityList = []
 var currentDate = moment().format('L');
 $("#date").text("(" + currentDate + ")")
 
-//look for history and clear (if wanted)
+//look for history and clear 
 initializeHistory();
 
 showClear();
@@ -88,7 +88,7 @@ function currentConditions(searchValue) {
             var lon = response.coord.lon;
 
             var UVurl = "https://api.openweathermap.org/data/2.5/uvi?&lat=" + lat + "&lon=" + lon + "&appid=" + APIkey;
-            
+
             //AJAX call - UV index
             $.ajax({
                 url: UVurl,
@@ -97,10 +97,12 @@ function currentConditions(searchValue) {
                 UVindex.text(response.value);
             });
 
-        
+
+
+
             var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?&lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIkey;
 
-            
+
 
             // AJAX call - 5-day forecast
             $.ajax({
@@ -108,7 +110,7 @@ function currentConditions(searchValue) {
                 method: "GET"
             })
 
-               .then(function (response) {
+                .then(function (response) {
                     console.log(response);
                     $('#five-day-forecast').empty();
                     for (var i = 1; i < response.list.length; i += 8) {
@@ -118,12 +120,12 @@ function currentConditions(searchValue) {
 
                         var forecastCol = $("<div class='col-12 col-md-6 col-lg forecast-day mb-3'>");
                         var forecastCard = $("<div class='card'>");
-                       var forecastCardLayout = $("<div class='card-layout'>");
+                        var forecastCardLayout = $("<div class='card-layout'>");
                         var forecastDate = $("<h4 class='card-title'>");
                         var forecastTemp = $("<p class='card-input mb-0'>");
                         var forecastWind = $("<p class='card-input mb-0'>");
                         var forecastHumidity = $("<p class='card-input mb-0'>");
-                       var forecastIcon = $("<img>");
+                        var forecastIcon = $("<img>");
 
                         $('#five-day-forecast').append(forecastCol);
                         forecastCol.append(forecastCard);
