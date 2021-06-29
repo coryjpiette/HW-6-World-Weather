@@ -77,12 +77,12 @@ function currentConditions(searchValue) {
             console.log(response);
             City.text(response.name);
             City.append("<small class='text-muted' id='date'>");
-            $("#date").text("(" + currentDate + ")");
+            $("#date").text("    (" + currentDate + ")");
             City.append("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png' alt='" + response.weather[0].main + "' />")
             Temp.text(response.main.temp);
             Temp.append("&deg;F");
             Humidity.text(response.main.humidity + "%");
-            Wind.text(response.wind.speed + "MPH");
+            Wind.text(response.wind.speed + " MPH");
 
             var lat = response.coord.lat;
             var lon = response.coord.lon;
@@ -138,9 +138,9 @@ function currentConditions(searchValue) {
                         forecastTemp.text(response.list[i].main.temp);
                         forecastTemp.prepend("Temp: ");
                         forecastTemp.append("&deg;F");
-                        forecastWind.text(response.list[i].main.wind);
+                        forecastWind.text(response.list[i].wind.speed);
                         forecastWind.prepend("Wind: ");
-                        forecastWind.append("MPH");
+                        forecastWind.append(" MPH");
                         forecastHumidity.text(response.list[i].main.humidity);
                         forecastHumidity.prepend("Humidity: ");
                         forecastHumidity.append("%");
@@ -185,7 +185,8 @@ function searchHistory(searchValue) {
 
 // List the array into the search history sidebar
 function listArray() {
-    // Empty out the elements in the sidebar
+
+    // Empty elements in the sidebar
     savedHistory.empty();
 
     // DIsplay cities on the side
