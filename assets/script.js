@@ -161,5 +161,43 @@ function searchHistory(searchValue) {
             cityList.push(searchValue);
 
 
+// Display city history
+listArray();
+clearHistoryButton.removeClass("hide");
+weatherContent.removeClass("hide");
+} else {
+
+var removeIndex = cityList.indexOf(searchValue);
+cityList.splice(removeIndex, 1);
+
+
+cityList.push(searchValue);
+
+// retrieiving search history
+listArray();
+clearHistoryButton.removeClass("hide");
+weatherContent.removeClass("hide");
+}
+}
+
+}
+
+// List the array into the search history sidebar
+function listArray() {
+    // Empty out the elements in the sidebar
+    savedHistory.empty();
+
+    // DIsplay cities on the side
+
+    cityList.forEach(function(city){
+        var searchHistoryItem = $('<li class="list-group-item city-btn">');
+        searchHistoryItem.attr("data-value", city);
+        searchHistoryItem.text(city);
+        savedHistory.prepend(searchHistoryItem);
+    });
+    // Update city list history in local storage
+    localStorage.setItem("cities", JSON.stringify(cityList));
+    
+}
 
 
