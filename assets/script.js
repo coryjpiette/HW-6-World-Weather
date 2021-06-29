@@ -95,3 +95,15 @@ function  currentConditions(searchValue) {
         }).then(function(response){
             UVindex.text(response.value);
         });
+
+        //finding country code
+        var countryCode = response.sys.country;
+        var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?&units=imperial&appid=" + APIkey + "&lat=" + lat +  "&lon=" + lon;
+
+        });
+
+    }
+
+    
+
+
