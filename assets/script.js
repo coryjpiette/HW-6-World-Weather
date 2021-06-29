@@ -44,3 +44,22 @@ findCityBtn.on("click", function(event){
    findCityInput.val(""); 
 });
 
+// Clearing search history
+clearHistoryButton.on("click", function(){ 
+    cityList = [];
+
+        // Update city list history in local storage
+        listArray();
+    
+        $(this).addClass("hide");
+    });
+    
+    // Clicking button will prompt city info
+    savedHistory.on("click","li.city-btn", function(event) {
+      
+        var value = $(this).data("value");
+         currentConditions(value);
+        searchHistory(value); 
+    
+    });
+    
