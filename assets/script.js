@@ -16,7 +16,7 @@ var currentDate = moment().format('L');
 $("#date").text("(" + currentDate + ")")
 
 //look for history and clear (if wanted)
-lookupHistory();
+initializeHistory();
 
 showClear();
 
@@ -82,14 +82,13 @@ function currentConditions(searchValue) {
             Temp.text(response.main.temp);
             Temp.append("&deg;F");
             Humidity.text(response.main.humidity + "%");
-            Wind.text(response.wind + "MPH");
+            Wind.text(response.wind.speed + "MPH");
 
             var lat = response.coord.lat;
-            var long = response.coord.long;
+            var lon = response.coord.lon;
 
-
-            var UVurl = "https://api.openweathermap.org/data/2.5/uvi?&lat=" + lat + "&lon=" + long + "&appid=" + APIkey;
-
+            var UVurl = "https://api.openweathermap.org/data/2.5/uvi?&lat=" + lat + "&lon=" + lon + "&appid=" + APIkey;
+            
             //AJAX call - UV index
             $.ajax({
                 url: UVurl,
@@ -98,9 +97,10 @@ function currentConditions(searchValue) {
                 UVindex.text(response.value);
             });
 
-            //finding country code
-            var countryCode = response.sys.country;
-            var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?&units=imperial&appid=" + APIkey + "&lat=" + lat + "&lon=" + long;
+        
+            var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?&lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIkey;
+
+            
 
             // AJAX call - 5-day forecast
             $.ajax({
@@ -108,7 +108,7 @@ function currentConditions(searchValue) {
                 method: "GET"
             })
 
-                .then(function (response) {
+               .then(function (response) {
                     console.log(response);
                     $('#five-day-forecast').empty();
                     for (var i = 1; i < response.list.length; i += 8) {
@@ -118,16 +118,16 @@ function currentConditions(searchValue) {
 
                         var forecastCol = $("<div class='col-12 col-md-6 col-lg forecast-day mb-3'>");
                         var forecastCard = $("<div class='card'>");
-                        var forecastCardLayout = $("<div class='card-layout'>");
+                       var forecastCardLayout = $("<div class='card-layout'>");
                         var forecastDate = $("<h4 class='card-title'>");
                         var forecastTemp = $("<p class='card-input mb-0'>");
                         var forecastWind = $("<p class='card-input mb-0'>");
                         var forecastHumidity = $("<p class='card-input mb-0'>");
-                        var forecastIcon = $("<img>");
+                       var forecastIcon = $("<img>");
 
                         $('#five-day-forecast').append(forecastCol);
                         forecastCol.append(forecastCard);
-                        forecastCard.append(forecastCardBody);
+                        forecastCard.append(forecastCardLayout);
 
                         forecastCardLayout.append(forecastDate);
                         forecastCardLayout.append(forecastIcon);
@@ -156,30 +156,30 @@ function currentConditions(searchValue) {
 
 // Saving search history
 function searchHistory(searchValue) {
-   
+
     if (searchValue) {
         if (cityList.indexOf(searchValue) === -1) {
             cityList.push(searchValue);
 
 
-// Display city history
-listArray();
-clearDataBtn.removeClass("hide");
-weatherContent.removeClass("hide");
-} else {
+            // Display city history
+            listArray();
+            clearDataBtn.removeClass("hide");
+            weatherData.removeClass("hide");
+        } else {
 
-var removeIndex = cityList.indexOf(searchValue);
-cityList.splice(removeIndex, 1);
+            var removeIndex = cityList.indexOf(searchValue);
+            cityList.splice(removeIndex, 1);
 
 
-cityList.push(searchValue);
+            cityList.push(searchValue);
 
-// retrieiving search history
-listArray();
-clearDataBtn.removeClass("hide");
-weatherData.removeClass("hide");
-}
-}
+            // retrieiving search history
+            listArray();
+            clearDataBtn.removeClass("hide");
+            weatherData.removeClass("hide");
+        }
+    }
 
 }
 
@@ -190,7 +190,7 @@ function listArray() {
 
     // DIsplay cities on the side
 
-    cityList.forEach(function(city){
+    cityList.forEach(function (city) {
         var searchHistoryItem = $('<li class="list-group-item city-btn">');
         searchHistoryItem.attr("data-value", city);
         searchHistoryItem.text(city);
@@ -198,14 +198,13 @@ function listArray() {
     });
     // Add cities to local storage
     localStorage.setItem("cities", JSON.stringify(cityList));
-    
+
 }
 
 
 // Grab city list string from local storage
-// and update the city list array
-// for the search history sidebar
-function lookupHistory() {
+
+function initializeHistory() {
     if (localStorage.getItem("cities")) {
         cityList = JSON.parse(localStorage.getItem("cities"));
         var lastIndex = cityList.length - 1;
@@ -214,14 +213,13 @@ function lookupHistory() {
         // Display the last city viewed
         // if page is refreshed
         if (cityList.length !== 0) {
-             currentConditions(cityList[lastIndex]);
+            currentConditions(cityList[lastIndex]);
             weatherData.removeClass("hide");
         }
     }
 }
 
-// Check to see if there are elements in
-// search history sidebar in order to show clear history btn
+
 function showClear() {
     if (savedHistory.text() !== "") {
         clearDataBtn.removeClass("hide");
