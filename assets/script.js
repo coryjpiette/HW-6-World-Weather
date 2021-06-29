@@ -13,12 +13,12 @@ var cityList = []
 
 //Retrieve current date
 var currentDate = moment().format('L');
-$("#current-date").text("(" + currentDate + ")")
+$("#date").text("(" + currentDate + ")")
 
 //look for history and clear (if wanted)
 lookupHistory();
 
-clearHistory();
+showClear();
 
 
 //register city input from search hox
@@ -46,7 +46,7 @@ findCityBtn.on("click", function (event) {
 });
 
 // Clearing search history
-clearHistoryButton.on("click", function () {
+clearDataBtn.on("click", function () {
     cityList = [];
 
     // Update city list history in local storage
@@ -76,13 +76,13 @@ function currentConditions(searchValue) {
         .then(function (response) {
             console.log(response);
             City.text(response.name);
-            City.append("<small class='text-muted' id='current-date'>");
-            $("#current-date").text("(" + currentDate + ")");
+            City.append("<small class='text-muted' id='date'>");
+            $("#date").text("(" + currentDate + ")");
             City.append("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png' alt='" + response.weather[0].main + "' />")
             Temp.text(response.main.temp);
             Temp.append("&deg;F");
             Humidity.text(response.main.humidity + "%");
-            Wind.text(response.wind.speed + "MPH");
+            Wind.text(response.wind + "MPH");
 
             var lat = response.coord.lat;
             var long = response.coord.long;
@@ -100,7 +100,7 @@ function currentConditions(searchValue) {
 
             //finding country code
             var countryCode = response.sys.country;
-            var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?&units=imperial&appid=" + APIkey + "&lat=" + lat + "&lon=" + lon;
+            var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?&units=imperial&appid=" + APIkey + "&lat=" + lat + "&lon=" + long;
 
             // AJAX call - 5-day forecast
             $.ajax({
@@ -131,7 +131,8 @@ function currentConditions(searchValue) {
 
                         forecastCardLayout.append(forecastDate);
                         forecastCardLayout.append(forecastIcon);
-                        forecastCardLaytout.append(forecastTemp);
+                        forecastCardLayout.append(forecastTemp);
+                        forecastCardLayout.append(forecastWind);
                         forecastCardLayout.append(forecastHumidity);
                         forecastDate.text(forecastDateString);
                         forecastTemp.text(response.list[i].main.temp);
@@ -163,7 +164,7 @@ function searchHistory(searchValue) {
 
 // Display city history
 listArray();
-clearHistoryButton.removeClass("hide");
+clearDataBtn.removeClass("hide");
 weatherContent.removeClass("hide");
 } else {
 
@@ -175,8 +176,8 @@ cityList.push(searchValue);
 
 // retrieiving search history
 listArray();
-clearHistoryButton.removeClass("hide");
-weatherContent.removeClass("hide");
+clearDataBtn.removeClass("hide");
+weatherData.removeClass("hide");
 }
 }
 
@@ -195,9 +196,36 @@ function listArray() {
         searchHistoryItem.text(city);
         savedHistory.prepend(searchHistoryItem);
     });
-    // Update city list history in local storage
+    // Add cities to local storage
     localStorage.setItem("cities", JSON.stringify(cityList));
     
+}
+
+
+// Grab city list string from local storage
+// and update the city list array
+// for the search history sidebar
+function lookupHistory() {
+    if (localStorage.getItem("cities")) {
+        cityList = JSON.parse(localStorage.getItem("cities"));
+        var lastIndex = cityList.length - 1;
+        // console.log(cityList);
+        listArray();
+        // Display the last city viewed
+        // if page is refreshed
+        if (cityList.length !== 0) {
+             currentConditions(cityList[lastIndex]);
+            weatherData.removeClass("hide");
+        }
+    }
+}
+
+// Check to see if there are elements in
+// search history sidebar in order to show clear history btn
+function showClear() {
+    if (savedHistory.text() !== "") {
+        clearDataBtn.removeClass("hide");
+    }
 }
 
 
