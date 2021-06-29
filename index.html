@@ -17,82 +17,82 @@
 <body>
     <div class="container-fluid">
         <div class="row navbar">
-            <div class="col-10 text-center">
+            <div class="col-12 text-center">
                 <h1 class="navbar-brand pb-0 px-0">
-                        Cory's Weather Dashboard
+                    Cory's Weather Dashboard
                 </h1>
             </div>
         </div>
         <div class="row content-row">
             <div class="col-12 col-md-3 bg-light pt-3">
-            <h3>
-                Search for a City:
-            </h3>
-      
-        <form>
-            <div class="form-group input-group">
-                <input type="text" class="form-control" id="find-city" placeholder="Please enter city here...">
-                <div class="input-group-append">
-                    <button class="btn btn-info" type="button" id="find-city-button">
-                        <i class="fa fa-search">
-                        </i>
+                <h3>
+                    Search for a City:
+                </h3>
 
+                <form>
+                    <div class="form-group input-group">
+                        <input type="text" class="form-control" id="find-city" placeholder="Please enter city here...">
+                        <div class="input-group-append">
+                            <button class="btn btn-info" type="button" id="find-city-button">
+                                <i class="fa fa-search">
+                                </i>
+
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="card">
+                    <ul class="list-group list-group-flush" id="saved-history">
+                    </ul>
+                    <button id="clear-data" class="btn btn-sm-secondary hide">
+                        Clear history
                     </button>
                 </div>
             </div>
-            </form>
-            <div class="card">
-                <ul class="list-group list-group-flush" id="saved-history">
-                </ul>
-<button id="clear-data" class="btn btn-med-secondary hide">
-    Clear history
-</button>
-            </div>
-        </div>
-        <div id="weather-data" class="col-12 col-md-8 hide">
-        <div class = "row">
-<div class = "col-10">
-    <div class = "city-data border rounded my-4 px-4 px-4">
-<h2 id = "city">
-    City Weather
-    <small class="text-muted" id="date">
-        </small>
-        </h2>
-    </small>
-</h2>
-<p class="mb-0">Temp: <span id="temp"></span></p>
-<p class="mb-0">Wind: <span id="wind"></span></p>
-<p class="mb-0">Humidity: <span id="humidity"></span></p>
-<p>UV index: <span id="uvindex"></span></p>
-</div>
+            <div id="weather-data" class="col-12 col-md-9 hide">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="city-data border rounded my-4 px-4 py-4">
+                            <h2 id="city">
+                                City Weather
+                                <small class="text-muted" id="date">
+                                </small>
+                            </h2>
+                            </small>
+                            </h2>
+                            <p class="mb-0">Temp: <span id="temp"></span></p>
+                            <p class="mb-0">Wind: <span id="wind"></span></p>
+                            <p class="mb-0">Humidity: <span id="humidity"></span></p>
+                            <p>UV index: <span id="uvindex"></span></p>
+                        </div>
 
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <h3>5-Day Forecast</h3>
-        
-    </div>
-</div>
-<div id="five-day-forecast" class="row">
-    <div class="col-2">
-        <div class="card">
-            <div class="card-body">
-            <h5 class="card-title">Date</h5>
-            <i class="fa fa-sun-o"></i>
-            <p class="card-text">Temp: </p>
-            <p class="card-text">Wind: </p>
-            <p class="card-text">Humidity: </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h3>5-Day Forecast</h3>
+
+                    </div>
+                </div>
+                <div id="five-day-forecast" class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-layout">
+                                <h5 class="card-title">Date</h5>
+                                <i class="fa fa-sun-o"></i>
+                                <p class="card-input">Temp: </p>
+                                <p class="card-input">Wind: </p>
+                                <p class="card-input">Humidity: </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
-</div>
 
-       
-        <script src="Assets/script.js"></script>
+
+    <script src="Assets/script.js"></script>
 </body>
 
 </html>
