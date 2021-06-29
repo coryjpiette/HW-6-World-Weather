@@ -1,5 +1,7 @@
 World-Weather-Forecast
 
+The weather dashboard can be reached at: https://coryjpiette.github.io/World-Weather-Forecast/
+
 Enter your city of choice in the box on the left-hand side of the screen and either click the search icon or press the "enter" key.
 
 The city's name, today's date, and the current weather conditions will appear on the main section of the screen. The weather information included is as follows:
