@@ -153,6 +153,13 @@ function currentConditions(searchValue) {
 
 };
 
+// Saving search history
+function searchHistory(searchValue) {
+   
+    if (searchValue) {
+        if (cityList.indexOf(searchValue) === -1) {
+            cityList.push(searchValue);
+
 
 
 
