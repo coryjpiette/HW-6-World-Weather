@@ -34,7 +34,7 @@ $(document).on("submit", function(){
 //my API key from Open Weather
 var APIkey = "d8b1de6dc1f6e8219e73d53dc5f1c2c3";
 
-//butin click to add to search history
+//button click to add to search history
 findCityBtn.on("click", function(event){
     event.preventDefault();
     var searchValue = findCityInput.val().trim();
@@ -69,4 +69,29 @@ function  currentConditions(searchValue) {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&units=imperial&appid=" + APIkey;
     
     $.ajax({
-        url: queryURL;
+        url: queryURL,
+        method: "GET"
+    })
+    .then(function(response){
+        console.log(response);
+        City.text(response.name);
+        City.append("<small class='text-muted' id='current-date'>");
+        $("#current-date").text("(" + currentDate + ")");
+        City.append("<img src='https://openweathermap.org/img/w/" + response.weather[0].icon + ".png' alt='" + response.weather[0].main + "' />" )
+        Temp.text(response.main.temp);
+        Temp.append("&deg;F");
+        Humidity.text(response.main.humidity + "%");
+        Wind.text(response.wind.speed + "MPH");
+
+        var lat = response.coord.lat;
+        var long = response.coord.long;
+        
+
+        var UVurl = "https://api.openweathermap.org/data/2.5/uvi?&lat=" + lat + "&lon=" + long + "&appid=" + APIkey;
+        //AJAX call - UV index
+        $.ajax({
+            url: UVurl,
+            method: "GET"
+        }).then(function(response){
+            UVindex.text(response.value);
+        });
