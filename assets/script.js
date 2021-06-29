@@ -10,8 +10,6 @@ var UVindex = $("#uvindex");
 var weatherData =$('#weather-data');
 var cityList=[]
 
-//registered for my own API key on Open Weather
-var APIkey="d8b1de6dc1f6e8219e73d53dc5f1c2c3"
 
 //Retrieve current date
 var currentDate = moment().format('L');
@@ -33,3 +31,16 @@ $(document).on("submit", function(){
     findCityInput.val(""); 
 });
  
+//my API key from Open Weather
+var APIkey = "d8b1de6dc1f6e8219e73d53dc5f1c2c3";
+
+//butin click to add to search history
+findCityBtn.on("click", function(event){
+    event.preventDefault();
+    var searchValue = findCityInput.val().trim();
+
+    currentConditions(searchValue)
+   searchHistory(searchValue);    
+   findCityInput.val(""); 
+});
+
