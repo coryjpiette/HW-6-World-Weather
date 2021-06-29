@@ -59,7 +59,14 @@ clearHistoryButton.on("click", function(){
       
         var value = $(this).data("value");
          currentConditions(value);
-        searchHistory(value); 
-    
+        searchHistory(value);  
     });
     
+// Request Open Weather API based on user input
+function  currentConditions(searchValue) {
+    
+    //AJAX API call
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&units=imperial&appid=" + APIkey;
+    
+    $.ajax({
+        url: queryURL;
