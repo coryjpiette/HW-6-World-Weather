@@ -211,14 +211,7 @@ function initializeHistory() {
     if (localStorage.getItem("cities")) {
         cityList = JSON.parse(localStorage.getItem("cities"));
         var lastIndex = cityList.length - 1;
-        // console.log(cityList);
-        listArray();
-        // Display the last city viewed
-        // if page is refreshed
-        if (cityList.length !== 0) {
-            currentConditions(cityList[lastIndex]);
-            weatherData.removeClass("hide");
-        }
+
     }
 }
 
