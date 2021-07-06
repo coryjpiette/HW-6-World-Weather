@@ -22,5 +22,6 @@ To review a prior selection, simply click on the city's name.
 
 You can remove the search history by clicking the "Clear history" button.
 
+Here is a screenshot of the dashboard:
 
 ![image](https://user-images.githubusercontent.com/60293516/124596221-047c8d00-de30-11eb-86f0-ae2e9e5465c6.png)
