@@ -89,19 +89,17 @@ function currentConditions(searchValue) {
 
             var UVurl = "https://api.openweathermap.org/data/2.5/uvi?&lat=" + lat + "&lon=" + lon + "&appid=" + APIkey;
 
-            //AJAX call - UV index
-            $.ajax({
-                url: UVurl,
-                method: "GET"
-            }).then(function (response) {
-                UVindex.text(response.value);
-            });
-
-
-
-
+                    //AJAX call - UV index
+                    $.ajax({
+                        url: UVurl,
+                        method: "GET"
+                    }).then(function (response) {
+                        UVindex.text(response.value);
+                    });
+        
+        
+                
             var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?&lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIkey;
-
 
 
             // AJAX call - 5-day forecast
@@ -109,6 +107,7 @@ function currentConditions(searchValue) {
                 url: forecastURL,
                 method: "GET"
             })
+          
 
                 .then(function (response) {
                     console.log(response);
