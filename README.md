@@ -12,7 +12,7 @@ The city's name, today's date, and the current weather conditions will appear on
 
 -Humidity
 
--UV Index (colors will vary based on UV sedverity)
+-UV Index
 
 The 5-day forecast will appear underneath the current weather information.
 
