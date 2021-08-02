@@ -1,6 +1,6 @@
 World-Weather-Forecast
 
-The weather dashboard can be reached at: https://coryjpiette.github.io/World-Weather-Forecast/
+The weather dashboard can be reached at: https://coryjpiette.github.io/Weather/
 
 Enter your city of choice in the box on the left-hand side of the screen and either click the search icon or press the "enter" key.
 
